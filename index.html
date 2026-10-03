@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bảng Biến Màu Chuẩn (CSS Variables) - UI Design System</title>
+  <style>
+    /* ========================================================
+       HỆ THỐNG CSS VARIABLES TẠI :ROOT
+       Theo tiêu chuẩn UI/UX & Web Design hiện đại
+       ======================================================== */
+    :root {
+      /* --- 1. HAI MÀU CHỦ ĐẠO (Brand & Accent Colors) --- */
+      --color-primary: #2563eb;          /* Màu chính: Xanh dương hiện đại, tạo cảm giác tin cậy, chuyên nghiệp */
+      --color-primary-hover: #1d4ed8;    /* Biến thể hover cho nút bấm / liên kết primary */
+      
+      --color-secondary: #0d9488;        /* Màu phụ: Xanh mòng két (Teal), tạo điểm nhấn cân bằng và tươi mới */
+      --color-secondary-hover: #0f766e;  /* Biến thể hover cho secondary */
+
+      /* --- 2. BA MỨC MÀU XÁM CHO TEXT (Typography Hierarchy) --- */
+      --text-primary: #111827;           /* Mức 1 (Đậm nhất - Gray 900): Dùng cho tiêu đề H1-H6, nhãn quan trọng */
+      --text-secondary: #4b5563;         /* Mức 2 (Trung bình - Gray 600): Dùng cho văn bản nội dung (body text), mô tả */
+      --text-muted: #9ca3af;             /* Mức 3 (Nhạt - Gray 400): Dùng cho chú thích phụ, placeholder, ngày giờ, disabled */
+
+      /* --- BIẾN BỔ TRỢ GIAO DIỆN (Nền, Khung, Bo góc) --- */
+      --bg-page: #f8fafc;                /* Nền trang nhẹ nhàng, chống lóa mắt */
+      --bg-card: #ffffff;                /* Nền card / container */
+      --border-color: #e2e8f0;           /* Đường viền phân cách */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* CSS Reset cơ bản & Thiết lập nền */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-page);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      padding: 2.5rem 1rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 860px;
+    }
+
+    /* Header demo */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    h1 {
+      color: var(--text-primary);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    /* Bảng minh họa Color Swatches */
+    .section-title {
+      color: var(--text-primary);
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .swatches-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .swatch-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .color-preview {
+      height: 70px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.75rem;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .swatch-info .name {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--text-primary);
+    }
+
+    .swatch-info .hex {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-family: monospace;
+    }
+
+    /* Minh họa áp dụng thực tế (Interactive Component Card) */
+    .card-preview {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .card-meta {
+      font-size: 0.8125rem;
+      color: var(--text-muted); /* Áp dụng --text-muted */
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary); /* Áp dụng --text-primary */
+      margin-bottom: 0.75rem;
+    }
+
+    .card-desc {
+      font-size: 1rem;
+      color: var(--text-secondary); /* Áp dụng --text-secondary */
+      margin-bottom: 1.5rem;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    /* Buttons sử dụng biến màu chủ đạo */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.925rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary); /* Áp dụng --color-primary */
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: var(--color-secondary); /* Áp dụng --color-secondary */
+      color: #ffffff;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--color-secondary-hover);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--bg-page);
+      color: var(--text-primary);
+    }
+
+    /* Hộp hiển thị mã code */
+    .code-box {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1.25rem;
+      border-radius: var(--radius-md);
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.875rem;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+
+    .code-comment {
+      color: #94a3b8;
+    }
+
+    .code-var {
+      color: #38bdf8;
+    }
+
+    .code-val {
+      color: #f472b6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <h1>Hệ Thống Bảng Mã Màu CSS (:root)</h1>
+      <p class="subtitle">Được cấu hình tối ưu độ tương phản (WCAG AA/AAA) và phân cấp thị giác</p>
+    </header>
+
+    <!-- 1. Bảng Swatch Màu -->
+    <h2 class="section-title">1. Bảng màu định nghĩa</h2>
+    <div class="swatches-grid">
+      <!-- Primary -->
+      <div class="swatch-card">
+        <div class="color-preview" style="background-color: var(--color-primary);"></div>
+        <div class="swatch-info">
+          <div class="name">Primary</div>
+          <div class="hex">#2563EB</div>
+        </div>
+      </div>
+
+      <!-- Secondary -->
+      <div class="swatch-card">
+        <div class="color-preview" style="background-color: var(--color-secondary);"></div>
+        <div class="swatch-info">
+          <div class="name">Secondary</div>
+          <div class="hex">#0D9488</div>
+        </div>
+      </div>
+
+      <!-- Text Primary -->
+      <div class="swatch-card">
+        <div class="color-preview" style="background-color: var(--text-primary);"></div>
+        <div class="swatch-info">
+          <div class="name">Text Primary</div>
+          <div class="hex">#111827</div>
+        </div>
+      </div>
+
+      <!-- Text Secondary -->
+      <div class="swatch-card">
+        <div class="color-preview" style="background-color: var(--text-secondary);"></div>
+        <div class="swatch-info">
+          <div class="name">Text Secondary</div>
+          <div class="hex">#4B5563</div>
+        </div>
+      </div>
+
+      <!-- Text Muted -->
+      <div class="swatch-card">
+        <div class="color-preview" style="background-color: var(--text-muted);"></div>
+        <div class="swatch-info">
+          <div class="name">Text Muted</div>
+          <div class="hex">#9CA3AF</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Demo Áp Dụng Thực Tế -->
+    <h2 class="section-title">2. Minh họa giao diện thực tế</h2>
+    <div class="card-preview">
+      <div class="card-meta">Cập nhật 5 phút trước &bull; var(--text-muted)</div>
+      <h3 class="card-title">Thiết kế UI chuyên nghiệp với CSS Variables &bull; var(--text-primary)</h3>
+      <p class="card-desc">
+        Đoạn văn này minh họa cách sử dụng <code>var(--text-secondary)</code> cho nội dung chính. Độ tương phản vừa phải giúp người dùng đọc văn bản dài không bị mỏi mắt nhưng vẫn duy trì độ rõ ràng cao trên mọi màn hình.
+      </p>
+      <div class="card-actions">
+        <button class="btn btn-primary">Hành động chính (Primary)</button>
+        <button class="btn btn-secondary">Khám phá thêm (Secondary)</button>
+        <button class="btn btn-outline">Xem chi tiết</button>
+      </div>
+    </div>
+
+    <!-- 3. Mã Nguồn CSS Variables -->
+    <h2 class="section-title">3. Đoạn mã CSS Variables tại :root</h2>
+    <pre class="code-box"><code>:root {
+  <span class="code-comment">/* 2 Màu chủ đạo (Brand & Actions) */</span>
+  <span class="code-var">--color-primary</span>: <span class="code-val">#2563eb</span>;       <span class="code-comment">/* Xanh dương hiện đại */</span>
+  <span class="code-var">--color-secondary</span>: <span class="code-val">#0d9488</span>;     <span class="code-comment">/* Xanh Teal điểm nhấn */</span>
+
+  <span class="code-comment">/* 3 Mức màu xám cho văn bản (Typography) */</span>
+  <span class="code-var">--text-primary</span>: <span class="code-val">#111827</span>;        <span class="code-comment">/* Tiêu đề & nội dung quan trọng */</span>
+  <span class="code-var">--text-secondary</span>: <span class="code-val">#4b5563</span>;      <span class="code-comment">/* Nội dung chính / đoạn văn */</span>
+  <span class="code-var">--text-muted</span>: <span class="code-val">#9ca3af</span>;          <span class="code-comment">/* Chú thích, phụ lục, disabled */</span>
+}</code></pre>
+  </div>
+</body>
+</html>
